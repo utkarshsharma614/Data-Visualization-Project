@@ -1,0 +1,121 @@
+<html>
+
+<head>
+    <title>CSE 578 Project</title>
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .scatt_svg {
+            border: 1px solid black;
+            fill: black;
+            margin: 2px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="heading-css">CSE 578 Project - VAST MC 2 Challenge 2018 (Like a Duck to Water)</h3>
+
+    <center style="padding-bottom: 20px;">
+        <div id="controls">
+            <div style="margin-top: 25px;">
+                <label style="font-size: 17px; font-family: sans-serif;"> Chemical :</label>
+                <select id="chemical_ddl" style="font-family: sans-serif; font-size: 17px; height: 25px; width: 400px;" onchange="updateMeanStDAndChem();drawCircleGraph();drawPieGraph();drawAllScatterplots();drawStackedBarGraph();drawStreamline();"></select>
+            </div>
+            <!-- <br> -->
+
+        </div>
+    </center>
+
+    
+
+
+    <div id="wrapper1">
+        <!-- <center> -->
+        <div id="my_dataviz_stacked_bar">
+        </div>
+        <!-- </center> -->
+        <div class="calendar"></div>
+        <!-- <div id="calendar"></div> -->
+
+        <div id="my_dataviz_stream_graph">
+            <!-- create svg here -->
+            <svg id="stream_svg">
+            </svg>
+        </div>
+    </div>
+
+    <div id="slide_div">
+        <div class="slidecontainer">
+            <table>
+                <tr>
+                    <td>
+                        <p style="font-size: 16px; font-family: sans-serif; float:left;">Year: <span id="demo"></span></p>
+                    </td>
+                    <td>
+                        <input style="width: 650px;  margin-left: 24px; margin-top: 21px;margin-right: 24px;" type="range" min="1998" max="2016" value="1998" class="slider" id="myRange">
+                    </td>
+                    <td></td>
+                    <td style="font-size: 16px; width: 5%; position:absolute; font-family: sans-serif; float:left;">
+                        <p style="font-size: 16px; font-family: sans-serif; float:left;">Year: <span id="demoend">2016</span></p>
+                       
+                    </td>
+                    <td style="margin-left: 150px; padding-top: 8px;">
+                        <div style="margin-left: 80%; padding-top: 8px;">
+                            <input id="btn_play" onclick="playAnimation()" class="play" type="button" value="Play">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="wrapper2">
+        <div id="my_dataviz">
+            <div style="position: absolute;">
+                <img id="jungle_map" src="data/Waterways_Final.jpg" />
+            </div>
+
+
+            <div style="position: absolute;">
+                <svg id="innovative_svg"></svg>
+            </div>
+
+            </svg>
+        </div>
+
+        <div style="position: absolute; padding-top: 30px; padding-left: 800px;" id="my_dataviz_pie">
+            <svg id="innovative_svg_pie" style=" width:450;height:450;margin-left:20;">
+            </svg>
+            
+            <textarea readonly style="height: 172px; width: 272px; position: absolute; margin-top: 426px; padding:20px; border-radius: 2px; font-family: sans-serif; font-size: 17px; margin-left: -352px;" id="zero_val_loc_label"></textarea>
+        </div>
+    </div>
+
+    <div id="wrapper3">
+        <div id="proj_scatterplots" style="display: inline-block;padding-left: 0px;">
+        </div>
+    </div>
+
+    <br><br>
+
+
+
+</body>
+
+</html>
+
+<script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+        drawCircleGraph(this.value);
+        drawPieGraph(this.value);
+        drawAllScatterplots(this.value);
+    }
+</script>
